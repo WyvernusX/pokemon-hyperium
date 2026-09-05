@@ -1,6 +1,6 @@
 include kotlin.random.Random
 
-class Pokemon(var name: String, var hp: Int, var level: Int, var type: hashSet<String>, var pokemonMoves: Moveset, var pokemonStats: Stats, var pokemonState: String) { 
+class Pokemon(var name: String, var hp: Int, var level: Int, var type: HashSet<String>, var pokemonMoves: Moveset, var pokemonStats: Stats, var pokemonState: String) { 
 
   fun takeDamage(damage: Int) {
     this.hp = hp 
@@ -65,7 +65,7 @@ class Move(var name: String, var damage: Int, var type: String, var damageType: 
       }
        
       if (type in origin.type) {
-        finalDamage *= 1.5 
+        finalDamage = (finalDamage * 1.5).toInt() 
       }
       //TODO: check crit and check types
       target.takeDamage(finalDamage) 
@@ -95,15 +95,22 @@ class Moveset(var move1: Move, var move2: Move, var move3: Move, var move4: Move
 
 class Stats(var hpStat: Int, var damageStat: Int, var defenseStat: Int, var spDamageStat: Int, var spDefenseStat: Int, var speedStat: Int) {
  
-  val permStats: Array = arrayOf<Int>(hpStat, damageStat, defenseStat, spDamageStat, spDefenseStat, speedStat) 
+  val permStats: Array<Int> = arrayOf<Int>(hpStat, damageStat, defenseStat, spDamageStat, spDefenseStat, speedStat) 
 
   fun resetStats() {
-    this.hpStat = permStats[0]  
-    this.damageStat = permStats[1]
-    this.defenseStat = permStats[2]
-    this.spDamageStat = permStats[3]
-    this.spDefenseStat = permStats[4]
-    this.spDefenseStat = permstat[5]
+    this.hpStat = hpStat  
+    this.damageStat = damageStat 
+    this.defenseStat = defenseStat 
+    this.spDamageStat = spDamageStat 
+    this.spDefenseStat = spDefenseStat 
+    this.speedStat = speedStat 
+   
+    hpStat = permStats[0]
+    damageStat = permStats[1] 
+    defenseStat = permStats[2]
+    spDamageStat = permStats[3]
+    spDefenseStat = permStats[4]
+    speedStat = permStats[5]
   } 
 
   fun statBuff() {
