@@ -1,4 +1,9 @@
-include kotlin.random.Random
+import kotlin.random.Random
+//TODO: change type, status, and other stringy things to an ENUM NOWWWW
+
+class Location(var name: String, var type: String, var up: Location?, var down: Location?, var left: Location?, var right: Location?) {
+    
+}
 
 class Pokemon(var name: String, var hp: Int, var level: Int, var type: HashSet<String>, var pokemonMoves: Moveset, var pokemonStats: Stats, var pokemonState: String) { 
 
@@ -9,23 +14,7 @@ class Pokemon(var name: String, var hp: Int, var level: Int, var type: HashSet<S
     } else {
       hp -= damage
     }  
-  }  
-
-  /*fun doAttack(selectedMove: Move, target: Pokemon) {
-    this.hp = hp
-    this.level = level
-    this.type = type
-    this.pokemonStats = pokemonStats 
-   
-    if (selectedMove.damageType == "spAttack") {
-      var finalDamage = ((((level * 2 / 5) + 2 * selectedMove.damage * (pokemonStats.spDamageStat / target.pokemonStats.spDefenseStat)) / 50) + 2) 
-    } else if (selectedMove.damageType == "attack") {
-      var finalDamage = ((((level * 2 / 5) + 2 * selectedMove.damage * (pokemonStats.damageStat / target.pokemonStats.defenseStat)) / 50) + 2) 
-    }
-     
-    //TODO: calculate STAB, types, and crits here before doing damage, modify final damage or just modify the take damage function
-    target.takeDamage(finalDamage) 
-  }*/ 
+  }   
 
   fun checkState(stat: String) {
     
@@ -113,11 +102,30 @@ class Stats(var hpStat: Int, var damageStat: Int, var defenseStat: Int, var spDa
     speedStat = permStats[5]
   } 
 
-  fun statBuff() {
-    
+  fun statBuff(name: String, amount: Int) {
+    this.hpStat = hpStat
+    this.damageStat = damageStat
+    this.defenseStat = defenseStat
+    this.spDamageStat = spDamageStat
+    this.spDefenseStat = spDefenseStat
+    this.speedStat = speedStat 
+  
+    if (name == "hp") {
+      hpStat += amount 
+    } else if (name == "damage") {
+      damageStat += amount
+    } else if (name == "defense") {
+      defenseStat += amount
+    } else if (name == "specialDamage") {
+      spDamageStat += amount
+    } else if (name == "specialDefense") {
+      spDefenseStat += amount   
+    } else if (name == "speed") {
+      speedStat += amount
+    } 
   }  
 
-  fun tempStatBuff(name: String, amount: Int) {
+  /* fun tempStatBuff(name: String, amount: Int) {
     this.hpStat = hpStat
     this.damageStat = damageStat
     this.defenseStat = defenseStat
@@ -142,7 +150,7 @@ class Stats(var hpStat: Int, var damageStat: Int, var defenseStat: Int, var spDa
 
   fun tempStatDebuff() {
 
-  }
+  }*/
 } 
 
 class Player(var name: String, var badges: Int, var money: Int, var pokemonLineup: Array<Pokemon>, var playerInventory: Inventory) {
@@ -167,7 +175,7 @@ class Inventory() {
 }
 
 class Enemy(var name: String, var pokemonLineup: Array<Pokemon>) {
-
+  
 }
 
 fun main() { 
