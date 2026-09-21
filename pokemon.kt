@@ -165,16 +165,25 @@ class Inventory() {
   }
 
   fun add(name: String) {
-   
+    if (inventoryMap[name] == null) {
+      inventoryMap[name] = 1 
+    } else {
+      inventoryMap[name] = inventoryMap[name]!! + 1
+    }  
   }
 
   fun remove(name: String) {
-
+    if (inventoryMap[name] == 1) {
+      inventoryMap.remove(name) 
+    } else {
+      inventoryMap[name] = inventoryMap[name]!! - 1
+    }
   }
 
 }
 
-class Enemy(var name: String, var pokemonLineup: Array<Pokemon>) {
+//you could probably change this type to an enum
+class Enemy(var name: String, var type: String, var pokemonLineup: Array<Pokemon>) {
   
 }
 
